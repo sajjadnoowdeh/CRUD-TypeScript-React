@@ -11,7 +11,8 @@ interface ISorage extends IFormValue{
 function App() {
   const [formValue, setFormValue] = React.useState<IFormValue>();
   const [storage,setStorage] = React.useState<ISorage[]>([])
-
+  const [flagBtn,setFlagBtn] = React.useState<boolean>(true)
+  const [dataID,setDataID] = React.useState<number>(0)
   const addData= (fName:string,lName:string,address:string)=>{
     setStorage([...storage,{firstname:fName,lastname:lName,address:address,id:Date.now()}])
   }
@@ -19,10 +20,14 @@ function App() {
     addData(formValue!.firstname,formValue!.lastname,formValue!.address)
     setFormValue(undefined)
   }
-  useEffect(()=>{
-        console.log(storage);
-        
-  },[storage])
+  const handleEditData = (fName:string,lName:string,address:string)=>{
+     setStorage(storage.map((item)=> item.id === dataID ? {firstname:fName,lastname:lName,address:address,id:dataID} : item)) 
+     setFlagBtn(true) 
+     setFormValue(undefined)
+  }
+  const setHandleEditData =()=>{
+    handleEditData(formValue!.firstname,formValue!.lastname,formValue!.address)
+  }
   return (
     <>
       <div className="container">
@@ -47,14 +52,17 @@ function App() {
             formValue={formValue}
             setFormValue={setFormValue}
           />
-          <button type="button" className="btn btn-secondary w-100" onClick={handleAdd}>
-            ADD
+          <button type="button" className={`btn  ${(flagBtn) ? 'btn-secondary' : 'btn-success'} w-100`}
+             onClick={()=>(flagBtn) ? handleAdd() :setHandleEditData()}>
+             {(flagBtn) ? "ADD" : "Save"}
           </button>
         </div>
         <div className="mt-4">
           <DataTable
            setStorage={setStorage}
            data={storage}
+           setFlagBtn={setFlagBtn}
+           setDataID={setDataID}
            />
         </div>
       </div>

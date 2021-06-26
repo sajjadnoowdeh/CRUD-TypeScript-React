@@ -8,11 +8,18 @@ interface IDataTable{
     address:string
   }[]
   setStorage:Function
+  setFlagBtn:Function
+  setDataID:Function
 }
 const DataTable:React.FC<IDataTable> = (props) => {
   // Remove data 
   const removeData = (id:number)=>{
        props.setStorage(props.data.filter((item)=> item.id !== id))
+  }
+  // Edit data
+  const editData=(id:number)=>{
+     props.setFlagBtn(false)
+     props.setDataID(id)
   }
   return (
     <table className="table">
@@ -34,7 +41,7 @@ const DataTable:React.FC<IDataTable> = (props) => {
                 <td>{item.lastname}</td>
                 <td>{item.address}</td>
                 <td>
-                  <button className="btn btn-primary">Edit</button>
+                  <button className="btn btn-primary" onClick={()=>editData(item.id)}>Edit</button>
                   <button className="btn btn-danger ml-2" onClick={()=>removeData(item.id)}>Remove</button>
                 </td>
               </tr>
