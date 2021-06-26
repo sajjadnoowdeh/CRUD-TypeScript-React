@@ -17,8 +17,11 @@ function App() {
     setStorage([...storage,{firstname:fName,lastname:lName,address:address,id:Date.now()}])
   }
   const handleAdd=()=>{
-    addData(formValue!.firstname,formValue!.lastname,formValue!.address)
-    setFormValue(undefined)
+    if(formValue){
+      addData(formValue!.firstname,formValue!.lastname,formValue!.address)
+      setFormValue(undefined)
+    }
+    
   }
   const handleEditData = (fName:string,lName:string,address:string)=>{
      setStorage(storage.map((item)=> item.id === dataID ? {firstname:fName,lastname:lName,address:address,id:dataID} : item)) 

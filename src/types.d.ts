@@ -4,6 +4,4 @@
     address:string
 }
 
-
-
   export {IFormValue}
