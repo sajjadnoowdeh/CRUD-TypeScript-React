@@ -19,8 +19,6 @@ const Inputs:React.FC<Iinputs> =(props)=> {
         
     }
     useEffect(() => {
-        console.log(typeof props.formValue?.firstname);
-        
      if(props.formValue?.firstname === undefined && props.formValue?.lastname === undefined && props.formValue?.address === undefined){
          setCurrentVal("")
      }

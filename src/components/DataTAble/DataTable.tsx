@@ -2,12 +2,18 @@ import React from "react";
 // import {IDataTable} from '../../types'
 interface IDataTable{
   data:{
+    id:number
     firstname:string
     lastname:string
     address:string
   }[]
+  setStorage:Function
 }
 const DataTable:React.FC<IDataTable> = (props) => {
+  // Remove data 
+  const removeData = (id:number)=>{
+       props.setStorage(props.data.filter((item)=> item.id !== id))
+  }
   return (
     <table className="table">
       <thead>
@@ -29,7 +35,7 @@ const DataTable:React.FC<IDataTable> = (props) => {
                 <td>{item.address}</td>
                 <td>
                   <button className="btn btn-primary">Edit</button>
-                  <button className="btn btn-danger">Remove</button>
+                  <button className="btn btn-danger ml-2" onClick={()=>removeData(item.id)}>Remove</button>
                 </td>
               </tr>
              ))
