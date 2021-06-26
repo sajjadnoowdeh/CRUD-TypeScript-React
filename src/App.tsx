@@ -66,6 +66,7 @@ function App() {
            data={storage}
            setFlagBtn={setFlagBtn}
            setDataID={setDataID}
+           flagBtn={flagBtn}
            />
         </div>
       </div>

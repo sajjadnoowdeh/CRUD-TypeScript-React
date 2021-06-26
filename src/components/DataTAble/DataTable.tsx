@@ -10,6 +10,7 @@ interface IDataTable{
   setStorage:Function
   setFlagBtn:Function
   setDataID:Function
+  flagBtn:boolean
 }
 const DataTable:React.FC<IDataTable> = (props) => {
   // Remove data 
@@ -41,8 +42,17 @@ const DataTable:React.FC<IDataTable> = (props) => {
                 <td>{item.lastname}</td>
                 <td>{item.address}</td>
                 <td>
-                  <button className="btn btn-primary" onClick={()=>editData(item.id)}>Edit</button>
-                  <button className="btn btn-danger ml-2" onClick={()=>removeData(item.id)}>Remove</button>
+                  {(props.flagBtn) ? 
+                  <>
+                    <button className="btn btn-primary" onClick={()=>editData(item.id)}>Edit</button>
+                    <button className="btn btn-danger ml-2" onClick={()=>removeData(item.id)}>Remove</button>
+
+                  </>
+                :
+                null
+                
+                }
+                 
                 </td>
               </tr>
              ))
